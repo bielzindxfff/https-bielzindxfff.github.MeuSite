@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Minha Princesa Maria</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease;
+        }
+        
+        body.darkened {
+            background-color: #0a0a0a;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: linear-gradient(135deg, #111, #222);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.2);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: filter 0.5s ease;
+        }
+        
+        body.darkened .container {
+            filter: brightness(0.7);
+        }
+        
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .heart {
+            position: absolute;
+            color: #ff1493;
+            font-size: 20px;
+            opacity: 0.7;
+            animation: float 5s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        
+        h1 {
+            color: #ff1493;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+        }
+        
+        h2 {
+            color: #ff69b4;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .greeting {
+            font-size: 1.8rem;
+            color: #ff69b4;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section {
+            background-color: rgba(40, 40, 40, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            border-left: 5px solid #ff1493;
+            text-align: left;
+        }
+        
+        .section-right {
+            border-left: none;
+            border-right: 5px solid #ff1493;
+        }
+        
+        .section p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+        
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .message {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #eee;
+            margin: 30px 0;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(30, 30, 30, 0.7);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+        }
+        
+        .qualities {
+            background-color: rgba(50, 50, 50, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            border-left: 5px solid #ff1493;
+        }
+        
+        .qualities ul {
+            list-style-type: none;
+            text-align: left;
+        }
+        
+        .qualities li {
+            padding: 12px 0;
+            font-size: 1.2rem;
+            color: #ddd;
+            position: relative;
+            padding-left: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .qualities li:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+        
+        .qualities li:before {
+            content: "❤️";
+            position: absolute;
+            left: 0;
+            top: 12px;
+            font-size: 1.2rem;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: #ff69b4;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        
+        .nickname-changer {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(40, 40, 40, 0.7);
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .change-btn {
+            background: #ff1493;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .change-btn:hover {
+            background: #ff69b4;
+            transform: scale(1.05);
+        }
+        
+        .highlight {
+            color: #ff69b4;
+            font-weight: bold;
+        }
+        
+        .special-btn {
+            background: linear-gradient(45deg, #ff1493, #8a2be2);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .special-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(255, 20, 147, 0.6);
+        }
+        
+        .second-btn {
+            background: linear-gradient(45deg, #8a2be2, #ff1493);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .second-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.6);
+        }
+        
+        /* Efeitos especiais */
+        .special-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 999;
+            display: none;
+        }
+        
+        .special-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .special-heart {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0;
+            animation: fall 6s linear forwards;
+            text-shadow: 0 0 15px currentColor;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg) scale(0.8);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        .love-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            font-size: 4rem;
+            color: #ff1493;
+            text-shadow: 0 0 20px rgba(255, 20, 147, 0.8), 0 0 30px rgba(255, 20, 147, 0.6);
+            z-index: 1001;
+            opacity: 0;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.3;
+            display: none;
+        }
+        
+        .love-message.active {
+            display: block;
+            animation: popIn 4s ease-out forwards;
+        }
+        
+        @keyframes popIn {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 1;
+            }
+            30% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        .god-message {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.8), rgba(255, 20, 147, 0.8));
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.4);
+            text-align: center;
+            font-size: 1.4rem;
+            line-height: 1.7;
+            display: none;
+            border: 2px solid #ff69b4;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .god-message.active {
+            display: block;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .god-message .highlight {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            font-size: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .love-message {
+                font-size: 2.5rem;
+            }
+            
+            .special-heart {
+                font-size: 30px;
+            }
+            
+            .god-message {
+                font-size: 1.2rem;
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .greeting {
+                font-size: 1.5rem;
+            }
+            
+            .section p, .qualities li {
+                font-size: 1rem;
+            }
+            
+            .message {
+                font-size: 1.1rem;
+            }
+            
+            .love-message {
+                font-size: 2rem;
+            }
+            
+            .special-btn {
+                padding: 15px 30px;
+                font-size: 1.3rem;
+            }
+            
+            .second-btn {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <div class="hearts" id="hearts"></div>
+        
+        <h1>Para Minha Princesa Maria</h1>
+        
+        <div class="greeting">
+            <p>Olá, <span id="nickname">Minha Princesa</span>!</p>
+        </div>
+        
+        <div class="nickname-changer">
+            <p>Como posso te chamar hoje?</p>
+            <button class="change-btn" onclick="changeNickname()">Mudar Apelido</button>
+        </div>
+        
+        <div class="section">
+            <h2>Desde que te conheci...</h2>
+            <p>Desde o primeiro momento em que nossos olhares se cruzaram, algo dentro de mim mudou para sempre. Eu ainda não sabia, mas já estava completamente apaixonado por você.</p>
+            <p>Cada conversa, cada risada compartilhada, cada momento ao seu lado só confirmava o que meu coração já sabia: <span class="highlight">você era a pessoa que eu sempre procurei</span>.</p>
+            <p>Seu sorriso ilumina meus dias, sua voz acalma minha alma, e seu amor preenche cada espaço vazio dentro de mim. Desde que te conheci, minha vida ganhou cores que nem sabia que existiam.</p>
+        </div>
+        
+        <div class="section section-right">
+            <h2>O que sinto por você</h2>
+            <p>Meu amor por você é como um rio que nunca para de correr. Começou como um pequeno filete e hoje é uma correnteza forte que carrega meus sonhos, meus desejos e minha felicidade.</p>
+            <p><span class="highlight">Você é o meu lugar favorito no mundo inteiro</span>. Não importa onde estejamos, se estou ao seu lado, estou em casa. Seu abraço é o meu refúgio, seu colo é o meu conforto, seu amor é a minha paz.</p>
+            <p>Amo a maneira como você ri, como seus olhos brilham quando está feliz, como você me olha quando acho que ninguém está prestando atenção.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Nossos momentos</h2>
+            <p>Guardo cada momento nosso como um tesouro precioso. Desde as conversas mais simples até os abraços mais apertados, tudo com você se torna especial.</p>
+            <p>Adormecer pensando em você e acordar com seu nome na mente se tornou a minha rotina favorita. <span class="highlight">Sonhar com você é o meu passatempo preferido</span>, mas estar ao seu lado é a minha realidade mais amada.</p>
+            <p>Cada "bom dia" seu é como um raio de sol entrando pela janela da minha alma, iluminando todo o meu ser.</p>
+        </div>
+        
+        <div class="section section-right">
+            <h2>O que você significa para mim</h2>
+            <p>Você é a melodia da minha música favorita, a estrofe mais bonita do meu poema, a cena mais emocionante do meu filme.</p>
+            <p><span class="highlight">Você transformou minha vida em algo extraordinário</span>. Antes de você, eu apenas existia. Depois de você, eu comecei a viver de verdade.</p>
+            <p>Se eu pudesse escolher novamente entre todas as pessoas do mundo, eu escolheria você milhões de vezes. Em cada vida, em cada universo, em cada possibilidade.</p>
+        </div>
+        
+        <div class="message">
+            <p>Você é uma mulher incrível e eu sou o <span class="highlight">HOMEM mais sortudo desse mundo</span> por poder falar que tenho você ao meu lado.</p>
+            <p>Você é uma mulher muitooo querida e que eu <span class="highlight">nunca quero te perder</span>. Cada dia ao seu lado é um presente que eu guardo com todo cuidado no meu coração.</p>
+            <p>Obrigado por ser exatamente quem você é, e por me permitir fazer parte da sua vida. Prometo honrar esse privilégio todos os dias.</p>
+        </div>
+        
+        <div class="qualities">
+            <h2>Meu amor, você é:</h2>
+            <ul>
+                <li>Linda</li>
+                <li>Maravilhosa</li>
+                <li>Cheirosa</li>
+                <li>Gentil</li>
+                <li>Uma pessoa de caráter</li>
+                <li>Uma pessoa honesta</li>
+                <li>Uma pessoa que sempre posso contar</li>
+                <li>Inteligente e perspicaz</li>
+                <li>Companheira em todos os momentos</li>
+                <li>Meu porto seguro</li>
+                <li>Minha melhor amiga</li>
+                <li>A razão do meu sorriso</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Meu compromisso com você</h2>
+            <p>Prometo sempre te amar, respeitar e cuidar de você. Prometo ser seu porto seguro, seu ombro amigo, seu companheiro de todas as horas.</p>
+            <p><span class="highlight">Prometo fazer você se sentir amada todos os dias</span>, mesmo nos dias difíceis. Prometo lembrar você de como é incrível, mesmo quando você duvidar.</p>
+            <p>E acima de tudo, prometo que meu amor por você só vai crescer a cada dia que passar, porque você é a melhor coisa que já aconteceu na minha vida.</p>
+        </div>
+        
+        <button class="special-btn" onclick="showSpecialEffect()">Clique aqui</button>
+        
+        <button class="second-btn" onclick="showGodMessage()">Clica aqui kk</button>
+        
+        <div class="god-message" id="godMessage">
+            <p><span class="highlight">Então aqui eu quis falar um pouco dos meus sentimentos.</span></p>
+            <p>Eu penso que eu cada vez estou me apaixonando mais por você só tenho a te agradecer póis você está cada dia mais me fazendo eu me aproximar de Deus.</p>
+        </div>
+        
+        <div class="footer">
+            <p>Com todo meu amor, para sempre</p>
+            <p>Seu grande amor ❤️</p>
+        </div>
+    </div>
+
+    <!-- Elementos para o efeito especial -->
+    <div class="special-overlay" id="specialOverlay"></div>
+    <div class="special-hearts" id="specialHearts"></div>
+    <div class="love-message" id="loveMessage">Só saiba que Eu Te Amo❤️</div>
+
+    <script>
+        // Criar corações flutuantes
+        const heartsContainer = document.getElementById('hearts');
+        const starsContainer = document.getElementById('stars');
+        const nicknames = ["Minha princesa", "Meu Bem", "Minha neném", "Minha vida", "Meu amor", "Minha rainha", "Meu tudo"];
+        let currentNicknameIndex = 0;
+        const nicknameElement = document.getElementById('nickname');
+        
+        // Elementos do efeito especial
+        const specialOverlay = document.getElementById('specialOverlay');
+        const specialHearts = document.getElementById('specialHearts');
+        const loveMessage = document.getElementById('loveMessage');
+        const godMessage = document.getElementById('godMessage');
+        
+        // Criar corações
+        for (let i = 0; i < 25; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.top = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heartsContainer.appendChild(heart);
+        }
+        
+        // Criar estrelas
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = (Math.random() * 3 + 1) + 'px';
+            star.style.height = star.style.width;
+            star.style.animationDelay = Math.random() * 5 + 's';
+            starsContainer.appendChild(star);
+        }
+        
+        // Alternar entre os apelidos
+        function changeNickname() {
+            currentNicknameIndex = (currentNicknameIndex + 1) % nicknames.length;
+            nicknameElement.textContent = nicknames[currentNicknameIndex];
+            
+            // Efeito de fade
+            nicknameElement.style.opacity = 0;
+            setTimeout(() => {
+                nicknameElement.style.opacity = 1;
+            }, 300);
+        }
+        
+        // Mudar apelido automaticamente a cada 5 segundos
+        setInterval(changeNickname, 5000);
+        
+        // Adicionar efeito de clique para criar mais corações
+        document.addEventListener('click', function(e) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤';
+            heart.style.left = e.clientX + 'px';
+            heart.style.top = e.clientY + 'px';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heart.style.animation = 'float 3s ease-in-out forwards';
+            document.body.appendChild(heart);
+            
+            // Remover coração após animação
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        });
+        
+        // Efeito especial do botão
+        function showSpecialEffect() {
+            // Escurecer o fundo
+            document.body.classList.add('darkened');
+            
+            // Mostrar overlay
+            specialOverlay.style.display = 'block';
+            
+            // Mostrar corações especiais
+            specialHearts.style.display = 'block';
+            
+            // Criar corações vermelhos escuros e roxos
+            for (let i = 0; i < 80; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('special-heart');
+                heart.innerHTML = '❤';
+                
+                // Cores alternadas entre vermelho escuro e roxo
+                if (i % 2 === 0) {
+                    heart.style.color = '#8B0000'; // Vermelho escuro
+                } else {
+                    heart.style.color = '#8A2BE2'; // Roxo
+                }
+                
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.fontSize = (Math.random() * 40 + 30) + 'px';
+                heart.style.animationDuration = (Math.random() * 4 + 5) + 's';
+                heart.style.animationDelay = (Math.random() * 3) + 's';
+                
+                specialHearts.appendChild(heart);
+            }
+            
+            // Mostrar mensagem de amor
+            loveMessage.classList.add('active');
+            
+            // Adicionar efeito de pulsação
+            loveMessage.classList.add('pulse');
+            
+            // Remover elementos após a animação
+            setTimeout(() => {
+                document.body.classList.remove('darkened');
+                specialOverlay.style.display = 'none';
+                specialHearts.style.display = 'none';
+                loveMessage.classList.remove('active', 'pulse');
+                
+                // Limpar corações
+                specialHearts.innerHTML = '';
+            }, 6000);
+        }
+        
+        // Mostrar mensagem sobre Deus
+        function showGodMessage() {
+            godMessage.classList.add('active');
+            
+            // Rolar suavemente até a mensagem
+            godMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Adicionar alguns corações especiais
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heart.style.color = '#8A2BE2';
+                document.body.appendChild(heart);
+                
+                // Remover coração após animação
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }
+        }
+        
+        // Efeito de digitação para algumas seções
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function typing() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                }
+            }
+            
+            typing();
+        }
+        
+        // Aplicar efeito de digitação após carregar a página
+        window.addEventListener('load', function() {
+            const typingElements = document.querySelectorAll('.highlight');
+            typingElements.forEach((el, index) => {
+                const originalText = el.textContent;
+                setTimeout(() => {
+                    typeWriter(el, originalText, 80);
+                }, 1000 + (index * 500));
+            });
+        });
+    </script>
+</body>
+</html>
+
